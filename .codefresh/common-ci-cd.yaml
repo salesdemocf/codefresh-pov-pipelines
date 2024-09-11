@@ -20,9 +20,10 @@
 # - Password for image registry.
 # CODEFRESH_PROJECT_NAME
 # Name for Codefresh pipeline project.
-# 
 # ARGOCD_SEED_APPLICATION_PIPELINE
-# Name for ArgoCD Application repository.
+# Name for ArgoCD application seed pipeline.
+# CONFIGS_SEED_APPLICATION_PIPELINE
+# Name for Configuration seed pipeline.
 
 
 # Trigger Variables
@@ -114,7 +115,7 @@ steps:
     title: Creating Configuration Files...
     type: codefresh-run
     arguments:
-      PIPELINE_ID: '${{CODEFRESH_PROJECT_NAME}}/${{ARGOCD_SEED_APPLICATION_PIPELINE}}'
+      PIPELINE_ID: '${{CODEFRESH_PROJECT_NAME}}/${{CONFIGS_SEED_APPLICATION_PIPELINE}}'
       BRANCH: main
       VARIABLE:
         - APPLICATION=${{APPLICATION_NAME}}

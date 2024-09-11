@@ -77,7 +77,7 @@ steps:
     title: Building Docker Image...
     type: build
     working_directory: ${{clone_src}}
-    image_name: ${{IMAGE_REGISTRY_DOMAIN}}/${{IMAGE_REGISTRY_NAME}}/${{APPLICATION_NAME}}
+    image_name: ${{IMAGE_REGISTRY_NAME}}/${{APPLICATION_NAME}}
     tag: ${{CF_SHORT_REVISION}}
     dockerfile: Dockerfile
     stage: build

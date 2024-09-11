@@ -10,6 +10,8 @@
 # - Name of GitOps Runtime.
 # CONFIGURATIONS_REPOSITORY
 # - Name of VCS Repository containing configuration files.
+# ISC_REPOSITORY
+# - Name of VCS Repository containing Codefresh configuration files.  ISC or Internal Shared Configurations.
 # APPLICATIONS_REPOSITORY
 # - Name of VCS Repository container ArgoCD application manifests.
 # IMAGE_REGISTRY_DOMAIN
@@ -122,6 +124,7 @@ steps:
       VARIABLE:
         - APPLICATION=${{APPLICATION_NAME}}
         - CONFIGURATIONS_REPOSITORY=${{CONFIGURATIONS_REPOSITORY}}
+        - ISC_REPOSITORY=${{ISC_REPOSITORY}}
         - GIT_INTEGRATION_NAME=${{GIT_INTEGRATION_NAME}}
         - FQDN_IMAGE=${{IMAGE_REGISTRY_DOMAIN}}/${{IMAGE_REGISTRY_NAME}}/${{APPLICATION_NAME}}
         - IMAGE_TAG=${{CF_SHORT_REVISION}}

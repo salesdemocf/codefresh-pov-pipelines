@@ -137,6 +137,7 @@ steps:
         arguments:
           PIPELINE_ID: '${{CODEFRESH_PROJECT_NAME}}/${{CONFIGS_SEED_APPLICATION_PIPELINE}}'
           BRANCH: main
+          TRIGGER_ID: disabled-default-trigger
           VARIABLE:
             - APPLICATION=${{APPLICATION_NAME}}
             - CONFIGURATIONS_REPOSITORY=${{CONFIGURATIONS_REPOSITORY}}
@@ -157,6 +158,7 @@ steps:
         arguments:
           PIPELINE_ID: '${{CODEFRESH_PROJECT_NAME}}/${{ARGOCD_SEED_APPLICATION_PIPELINE}}'
           BRANCH: main
+          TRIGGER_ID: disabled-default-trigger
           VARIABLE:
             - APPLICATION=${{APPLICATION_NAME}}
             - APPLICATIONS_REPOSITORY=${{APPLICATIONS_REPOSITORY}}

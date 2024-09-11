@@ -6,6 +6,8 @@
 # Pipeline Variables
 # GIT_INTEGRATION_NAME
 # - Name of GIT Pipeline Integration.
+# GITOPS_RUNTIME_NAME
+# - Name of GitOps Runtime.
 # CONFIGURATIONS_REPOSITORY
 # - Name of VCS Repository containing configuration files.
 # APPLICATIONS_REPOSITORY

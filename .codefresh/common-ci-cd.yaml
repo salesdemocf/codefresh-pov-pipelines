@@ -118,7 +118,7 @@ steps:
 
     # Check ArgoCD Files
       check_argocd_files:
-        title: Checking for ArgoCD FIles
+        title: Checking for ArgoCD FIles...
         type: freestyle
         image: quay.io/codefresh/cli
         working_directory: ${{clone_apps}}
@@ -153,7 +153,7 @@ steps:
     # Seed ArgoCD Files
 
       seed_argocd_files:
-        title: Creating ArgoCD Files
+        title: Creating ArgoCD Files...
         type: codefresh-run
         arguments:
           PIPELINE_ID: '${{CODEFRESH_PROJECT_NAME}}/${{ARGOCD_SEED_APPLICATION_PIPELINE}}'

@@ -45,32 +45,33 @@ stages:
 steps:
   clone:
     type: parallel
-  # Clone Source Code Repository
-    clone_src:
-      title: Cloning Source Code Repository...
-      type: git-clone
-      repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
-      revision: ${{CF_REVISION}}
-      git: ${{GIT_INTEGRATION_NAME}}
-      stage: clone
+    steps:
+    # Clone Source Code Repository
+      clone_src:
+        title: Cloning Source Code Repository...
+        type: git-clone
+        repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
+        revision: ${{CF_REVISION}}
+        git: ${{GIT_INTEGRATION_NAME}}
+        stage: clone
 
-  # Clone Configuration Repository
-    clone_configs:
-      title: Cloning Configuration Repository...
-      type: git-clone
-      repo: ${{CF_REPO_OWNER}}/${{CONFIGURATIONS_REPOSITORY}}
-      revision: main
-      git: ${{GIT_INTEGRATION_NAME}}
-      stage: clone
+    # Clone Configuration Repository
+      clone_configs:
+        title: Cloning Configuration Repository...
+        type: git-clone
+        repo: ${{CF_REPO_OWNER}}/${{CONFIGURATIONS_REPOSITORY}}
+        revision: main
+        git: ${{GIT_INTEGRATION_NAME}}
+        stage: clone
 
-  # Clone Applications Repository
-    clone_apps:
-      title: Cloning Applications Repository...
-      type: git-clone
-      repo: ${{CF_REPO_OWNER}}/${{APPLICATIONS_REPOSITORY}}
-      revision: main
-      git: ${{GIT_INTEGRATION_NAME}}
-      stage: clone
+    # Clone Applications Repository
+      clone_apps:
+        title: Cloning Applications Repository...
+        type: git-clone
+        repo: ${{CF_REPO_OWNER}}/${{APPLICATIONS_REPOSITORY}}
+        revision: main
+        git: ${{GIT_INTEGRATION_NAME}}
+        stage: clone
 
 
 # Build Image

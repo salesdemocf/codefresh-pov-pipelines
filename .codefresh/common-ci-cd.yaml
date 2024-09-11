@@ -139,7 +139,7 @@ steps:
           BRANCH: main
           TRIGGER_ID: disabled-default-trigger
           VARIABLE:
-            - APPLICATION=${{APPLICATION_NAME}}
+            - APPLICATION_NAME=${{APPLICATION_NAME}}
             - CONFIGURATIONS_REPOSITORY=${{CONFIGURATIONS_REPOSITORY}}
             - ISC_REPOSITORY=${{ISC_REPOSITORY}}
             - GIT_INTEGRATION_NAME=${{GIT_INTEGRATION_NAME}}
@@ -160,7 +160,7 @@ steps:
           BRANCH: main
           TRIGGER_ID: disabled-default-trigger
           VARIABLE:
-            - APPLICATION=${{APPLICATION_NAME}}
+            - APPLICATION_NAME=${{APPLICATION_NAME}}
             - APPLICATIONS_REPOSITORY=${{APPLICATIONS_REPOSITORY}}
             - CONFIGURATIONS_REPOSITORY=${{CONFIGURATIONS_REPOSITORY}}
             - GIT_INTEGRATION_NAME=${{GIT_INTEGRATION_NAME}}

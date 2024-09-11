@@ -53,7 +53,6 @@ steps:
         repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
         revision: ${{CF_REVISION}}
         git: ${{GIT_INTEGRATION_NAME}}
-        stage: clone
 
     # Clone Configuration Repository
       clone_configs:
@@ -62,7 +61,6 @@ steps:
         repo: ${{CF_REPO_OWNER}}/${{CONFIGURATIONS_REPOSITORY}}
         revision: main
         git: ${{GIT_INTEGRATION_NAME}}
-        stage: clone
 
     # Clone Applications Repository
       clone_apps:
@@ -71,7 +69,7 @@ steps:
         repo: ${{CF_REPO_OWNER}}/${{APPLICATIONS_REPOSITORY}}
         revision: main
         git: ${{GIT_INTEGRATION_NAME}}
-        stage: clone
+    stage: clone
 
 
 # Build Image
@@ -105,68 +103,70 @@ steps:
 
 # [Optional] - Application Creation
 
-# Check Conifguration Files
-  check_configuration_files:
-    title: Checking for Configuration Files...
-    type: freestyle
-    image: quay.io/codefresh/cli
-    working_directory: ${{clone_configs}}
-    commands:
-      - echo "Checking for Configuration Folder of ${{APPLICATION_NAME}}"
-      - ls ${{APPLICATION_NAME}} || cf_export CONFIGURATION_FILES_NOT_FOUND=true;
+  check:
+    type: parallel
+    steps:
+    # Check Conifguration Files
+      check_configuration_files:
+        title: Checking for Configuration Files...
+        type: freestyle
+        image: quay.io/codefresh/cli
+        working_directory: ${{clone_configs}}
+        commands:
+          - echo "Checking for Configuration Folder of ${{APPLICATION_NAME}}"
+          - ls ${{APPLICATION_NAME}} || cf_export CONFIGURATION_FILES_NOT_FOUND=true;
+
+    # Check ArgoCD Files
+      check_argocd_files:
+        title: Checking for ArgoCD FIles
+        type: freestyle
+        image: quay.io/codefresh/cli
+        working_directory: ${{clone_apps}}
+        commands:
+          - echo "Checking for ArgoCD Application file for ${{APPLICATION_NAME}}"
+          - cat ${{APPLICATION_NAME}}-dev.yaml || cf_export ARGOCD_FILES_NOT_FOUND=true;
     stage: seed
 
-# Seed Configuration Files
+  seed:
+    type: parallel
+    steps:
+    # Seed Configuration Files
+      seed_configurations_files:
+        title: Creating Configuration Files...
+        type: codefresh-run
+        arguments:
+          PIPELINE_ID: '${{CODEFRESH_PROJECT_NAME}}/${{CONFIGS_SEED_APPLICATION_PIPELINE}}'
+          BRANCH: main
+          VARIABLE:
+            - APPLICATION=${{APPLICATION_NAME}}
+            - CONFIGURATIONS_REPOSITORY=${{CONFIGURATIONS_REPOSITORY}}
+            - ISC_REPOSITORY=${{ISC_REPOSITORY}}
+            - GIT_INTEGRATION_NAME=${{GIT_INTEGRATION_NAME}}
+            - FQDN_IMAGE=${{IMAGE_REGISTRY_DOMAIN}}/${{IMAGE_REGISTRY_NAME}}/${{APPLICATION_NAME}}
+            - IMAGE_TAG=${{CF_SHORT_REVISION}}
+        when:
+          condition:
+            all:
+              whenConfigurationFilesNotFound: '"${{CONFIGURATION_FILES_NOT_FOUND}}" == "true"'
 
-  seed_configurations_files:
-    title: Creating Configuration Files...
-    type: codefresh-run
-    arguments:
-      PIPELINE_ID: '${{CODEFRESH_PROJECT_NAME}}/${{CONFIGS_SEED_APPLICATION_PIPELINE}}'
-      BRANCH: main
-      VARIABLE:
-        - APPLICATION=${{APPLICATION_NAME}}
-        - CONFIGURATIONS_REPOSITORY=${{CONFIGURATIONS_REPOSITORY}}
-        - ISC_REPOSITORY=${{ISC_REPOSITORY}}
-        - GIT_INTEGRATION_NAME=${{GIT_INTEGRATION_NAME}}
-        - FQDN_IMAGE=${{IMAGE_REGISTRY_DOMAIN}}/${{IMAGE_REGISTRY_NAME}}/${{APPLICATION_NAME}}
-        - IMAGE_TAG=${{CF_SHORT_REVISION}}
+    # Seed ArgoCD Files
+
+      seed_argocd_files:
+        title: Creating ArgoCD Files
+        type: codefresh-run
+        arguments:
+          PIPELINE_ID: '${{CODEFRESH_PROJECT_NAME}}/${{ARGOCD_SEED_APPLICATION_PIPELINE}}'
+          BRANCH: main
+          VARIABLE:
+            - APPLICATION=${{APPLICATION_NAME}}
+            - APPLICATIONS_REPOSITORY=${{APPLICATIONS_REPOSITORY}}
+            - CONFIGURATIONS_REPOSITORY=${{CONFIGURATIONS_REPOSITORY}}
+            - GIT_INTEGRATION_NAME=${{GIT_INTEGRATION_NAME}}
+        when:
+          condition:
+            all:
+              whenArgoCDFilesNotFound: '"${{ARGOCD_FILES_NOT_FOUND}}" == "true"'
     stage: seed
-    when:
-      condition:
-        all:
-          whenConfigurationFilesNotFound: '"${{CONFIGURATION_FILES_NOT_FOUND}}" == "true"'
-
-
-# Check ArgoCD Files
-  check_argocd_files:
-    title: Checking for ArgoCD FIles
-    type: freestyle
-    image: quay.io/codefresh/cli
-    working_directory: ${{clone_apps}}
-    commands:
-      - echo "Checking for ArgoCD Application file for ${{APPLICATION_NAME}}"
-      - cat ${{APPLICATION_NAME}}-dev.yaml || cf_export ARGOCD_FILES_NOT_FOUND=true;
-    stage: seed
-
-# Seed ArgoCD Files
-
-  seed_argocd_files:
-    title: Creating ArgoCD Files
-    type: codefresh-run
-    arguments:
-      PIPELINE_ID: '${{CODEFRESH_PROJECT_NAME}}/${{ARGOCD_SEED_APPLICATION_PIPELINE}}'
-      BRANCH: main
-      VARIABLE:
-        - APPLICATION=${{APPLICATION_NAME}}
-        - APPLICATIONS_REPOSITORY=${{APPLICATIONS_REPOSITORY}}
-        - CONFIGURATIONS_REPOSITORY=${{CONFIGURATIONS_REPOSITORY}}
-        - GIT_INTEGRATION_NAME=${{GIT_INTEGRATION_NAME}}
-    stage: seed
-    when:
-      condition:
-        all:
-          whenArgoCDFilesNotFound: '"${{ARGOCD_FILES_NOT_FOUND}}" == "true"'
 
 # / Application Creation
 

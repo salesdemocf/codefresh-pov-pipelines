@@ -212,7 +212,7 @@ steps:
     title: Committing Updated Development Overlay...
     type: git-commit
     arguments:
-      repo: ${{CF_REPO_OWNER}}/${{CONFIGURATION_REPOSITORY}}
+      repo: ${{CF_REPO_OWNER}}/${{CONFIGURATIONS_REPOSITORY}}
       git: ${{GIT_INTEGRATION_NAME}}
       working_directory: '${{CF_VOLUME_PATH}}/${{CONFIGURATIONS_REPOSITORY}}'
       commit_message: 'Deploying changes to ${{APPLICATION_NAME}} in Development'

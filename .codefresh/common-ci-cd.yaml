@@ -184,7 +184,7 @@ steps:
     commands:
       - echo 'Before Changes'
       - cat ${{APPLICATION_NAME}}/overlays/development/replace.yaml
-      - export NEW_IMAGE_VERSION=${{IMAGE_REGISTRT_DOMAIN}}/${{IMAGE_REGISTRY_NAME/${{APPLICATION_NAME}}:cf-${{CF_SHORT_REVISION}}
+      - export NEW_IMAGE_VERSION=${{IMAGE_REGISTRT_DOMAIN}}/${{IMAGE_REGISTRY_NAME}}/${{APPLICATION_NAME}}:${{CF_SHORT_REVISION}}
       - yq e -i '.[].value=strenv(NEW_IMAGE_VERSION)' ${{APPLICATION_NAME}}/overlays/development/replace.yaml
       - echo 'After Changes'
       - cat ${{APPLICATION_NAME}}/overlays/development/replace.yaml

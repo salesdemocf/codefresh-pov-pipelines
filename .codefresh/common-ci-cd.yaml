@@ -110,7 +110,7 @@ steps:
       check_configuration_files:
         title: Checking for Configuration Files...
         type: freestyle
-        image: quay.io/codefresh/cli
+        image: quay.io/codefresh/alpine
         working_directory: ${{clone_configs}}
         commands:
           - echo "Checking for Configuration Folder of ${{APPLICATION_NAME}}"
@@ -120,7 +120,7 @@ steps:
       check_argocd_files:
         title: Checking for ArgoCD FIles...
         type: freestyle
-        image: quay.io/codefresh/cli
+        image: quay.io/codefresh/alpine
         working_directory: ${{clone_apps}}
         commands:
           - echo "Checking for ArgoCD Application file for ${{APPLICATION_NAME}}"

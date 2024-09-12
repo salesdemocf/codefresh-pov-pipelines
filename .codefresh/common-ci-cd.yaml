@@ -190,9 +190,10 @@ steps:
       - cat ${{APPLICATION_NAME}}/overlays/development/replace.yaml
     stage: promote
     when:
-      branch:
-        only:
-          - main
+      condition:
+        all:
+          whenConfigurationFilesFound: '"${{CONFIGURATION_FILES_NOT_FOUND}}" == "false"'
+          maimBranch: '"${{CF_BRANCH}}" == "main"'
 
   check_for_untracked_changes:
     title: Checking for GIT Diff...
@@ -202,9 +203,10 @@ steps:
       - git diff --exit-code || cf_export CHANGED_FILES_FOUND=true;
     stage: promote
     when:
-      branch:
-        only:
-          - main
+      condition:
+        all:
+          whenConfigurationFilesFound: '"${{CONFIGURATION_FILES_NOT_FOUND}}" == "false"'
+          maimBranch: '"${{CF_BRANCH}}" == "main"'
 
   commit_and_push:
     title: Committing Updated Development Overlay...

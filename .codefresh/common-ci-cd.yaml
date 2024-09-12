@@ -197,7 +197,7 @@ steps:
   check_for_untracked_changes:
     title: Checking for GIT Diff...
     image: quay.io/codefresh-contrib/alpine/git
-    working_directory: ${{clone_config}}/${{APPLICATION_NAME}}/development
+    working_directory: ${{clone_configs}}/${{APPLICATION_NAME}}/development
     commands:
       - git diff --exit-code || cf_export CHANGED_FILES_FOUND=true;
     stage: promote

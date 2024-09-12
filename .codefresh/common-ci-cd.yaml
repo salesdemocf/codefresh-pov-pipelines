@@ -212,7 +212,7 @@ steps:
     arguments:
       repo: ${{CF_REPO_OWNER}}/${{CONFIGURATION_REPOSITORY}}
       git: ${{GIT_INTEGRATION_NAME}}
-      working_directory: '${{CF_VOLUME_PATH}}/${{CONFIGURATION_REPOSITORY}}'
+      working_directory: '${{CF_VOLUME_PATH}}/${{CONFIGURATIONS_REPOSITORY}}'
       commit_message: 'Deploying changes to ${{APPLICATION_NAME}} in Development'
       git_user_name: codefresh-automation
       git_user_email: automation@codefresh.io

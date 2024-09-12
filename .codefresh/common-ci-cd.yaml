@@ -124,9 +124,9 @@ steps:
         working_directory: ${{clone_apps}}
         commands:
           - echo "Checking for ArgoCD Application file for ${{APPLICATION_NAME}}"
-          - cat development/${{APPLICATION_NAME}}-dev.yaml || cf_export ARGOCD_FILES_NOT_FOUND=true;
-          - cat staging/${{APPLICATION_NAME}}-dev.yaml || cf_export ARGOCD_FILES_NOT_FOUND=true;
-          - cat production/${{APPLICATION_NAME}}-dev.yaml || cf_export ARGOCD_FILES_NOT_FOUND=true;
+          - cat development/${{APPLICATION_NAME}}-dev.yaml || cf_export ARGOCD_FILES_NOT_FOUND=true
+          - cat staging/${{APPLICATION_NAME}}-dev.yaml || cf_export ARGOCD_FILES_NOT_FOUND=true
+          - cat production/${{APPLICATION_NAME}}-dev.yaml || cf_export ARGOCD_FILES_NOT_FOUND=true
     stage: seed
 
   seed:

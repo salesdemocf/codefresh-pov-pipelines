@@ -193,7 +193,7 @@ steps:
       condition:
         all:
           whenConfigurationFilesFound: 'includes("${{CONFIGURATION_FILES_NOT_FOUND}}", "{{CONFIGURATION_FILES_NOT_FOUND}}") == true'
-          maimBranch: '"${{CF_BRANCH}}" == "main"'
+          mainBranch: '"${{CF_BRANCH}}" == "main"'
 
   check_for_untracked_changes:
     title: Checking for GIT Diff...
@@ -206,7 +206,7 @@ steps:
       condition:
         all:
           whenConfigurationFilesFound: 'includes("${{CONFIGURATION_FILES_NOT_FOUND}}", "{{CONFIGURATION_FILES_NOT_FOUND}}") == true'
-          maimBranch: '"${{CF_BRANCH}}" == "main"'
+          mainBranch: '"${{CF_BRANCH}}" == "main"'
 
   commit_and_push:
     title: Committing Updated Development Overlay...

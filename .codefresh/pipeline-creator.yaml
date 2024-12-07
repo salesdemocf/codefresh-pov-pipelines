@@ -1,0 +1,24 @@
+version: '1.0'
+
+stages:
+  - clone
+  - create
+
+steps:
+  clone:
+    title: Cloning repository...
+    type: git-clone
+    repo: salesdemocf/codefresh-pov-pipelines
+    revision: master
+    stage: clone
+
+  create_pipeline:
+    type: pipeline_trigger_merge
+    title: Creating pipeline...
+    working_directory: ${{clone}}/specifications
+    stage: clone
+    arguments:
+      SPEC: common-ci-cd-spec.yaml
+      ONLY_CHANGED: true
+      TRIGGERS_SUBDIR: triggers
+    stage: create

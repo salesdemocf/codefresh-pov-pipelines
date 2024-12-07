@@ -1,0 +1,24 @@
+spec:
+  triggers:
+    - name: microservice-c
+      type: git
+      repo: salesdemocf/codefresh-pov-microservice-c
+      events:
+        - push.heads
+      pullRequestAllowForkEvents: false
+      commentRegex: /.*/gi
+      branchRegex: /.*/gi
+      branchRegexInput: regex
+      gerritCIStatusLabels: []
+      provider: github
+      disabled: false
+      options:
+        noCache: false
+        noCfCache: false
+        resetVolume: false
+      verified: true
+      context: salesdemocf
+      contexts: []
+      variables:
+        - key: APPLICATION_NAME
+          value: microservice-c

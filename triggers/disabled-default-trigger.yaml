@@ -1,0 +1,22 @@
+spec:
+  triggers:
+    - name: disabled-default-trigger
+      type: git
+      repo: salesdemocf/codefresh-pipelines
+      events:
+        - push.heads
+      pullRequestAllowForkEvents: false
+      commentRegex: /.*/gi
+      branchRegex: /.*/gi
+      branchRegexInput: regex
+      gerritCIStatusLabels: []
+      provider: github
+      disabled: true
+      options:
+        noCache: false
+        noCfCache: false
+        resetVolume: false
+      verified: true
+      context: salesdemocf
+      contexts: []
+      variables: []

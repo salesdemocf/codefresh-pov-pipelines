@@ -1,0 +1,25 @@
+# Full Trigger Specification: https://codefresh.io/docs/docs/integrations/codefresh-api/#git-triggers
+spec:
+  triggers:
+    - name: <Repository_Name>
+      type: git
+      repo: <Organization_Name>/<Repository_Name>
+      events:
+        - push.heads
+      pullRequestAllowForkEvents: false
+      commentRegex: /.*/gi
+      branchRegex: /.*/gi
+      branchRegexInput: regex
+      gerritCIStatusLabels: []
+      provider: github
+      disabled: false
+      options:
+        noCache: false
+        noCfCache: false
+        resetVolume: false
+      verified: true
+      context: <Name_of_GIT_Pipeline_Integration>
+      contexts: []
+      variables:
+        - key: <Variable_Key>
+          value: <Variable_Value>

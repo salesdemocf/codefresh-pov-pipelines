@@ -1,0 +1,61 @@
+# Full Pipeline Specification: https://codefresh.io/docs/docs/integrations/codefresh-api/#full-pipeline-specification
+version: '1.0'
+kind: pipeline
+metadata:
+  name: example-shared-ci-cd
+  project: default
+  shortName: example-shared-ci-cd
+  deprecate: {}
+  labels:
+    tags:
+      - automation-example
+  clustersInfo:
+    injectAll: true
+    clusters: []
+  variables:
+    - key: GIT_INTEGRATION_NAME
+      value: salesdemocf
+      encrypted: false
+    - key: CONFIGURATIONS_REPOSITORY
+      value: codefresh-pov-configs
+      encrypted: false
+    - key: APPLICATIONS_REPOSITORY
+      value: codefresh-pov-apps
+      encrypted: false
+    - key: IMAGE_REGISTRY_DOMAIN
+      value: codedev.jfrog.io
+      encrypted: false
+    - key: IMAGE_REGISTRY_NAME
+      value: poc-demo-1-docker-local
+      encrypted: false
+    - key: IMAGE_REGISTRY_USERNAME
+      value: dev@codefresh.io
+      encrypted: false
+    - key: IMAGE_REGISTRY_PASSWORD
+      value: '*****'
+      encrypted: true
+    - key: CODEFRESH_PROJECT_NAME
+      value: Automation
+      encrypted: false
+    - key: ARGOCD_SEED_APPLICATION_PIPELINE
+      value: argocd-seed
+      encrypted: false
+    - key: CONFIGS_SEED_APPLICATION_PIPELINE
+      value: configs-seed
+      encrypted: false
+    - key: GITOPS_RUNTIME_NAME
+      value: poc-demo-1
+      encrypted: false
+    - key: ISC_REPOSITORY
+      value: poc-demo-1-demo-isc
+      encrypted: false
+  contexts: []
+  specTemplate:
+    location: git
+    repo: salesdemocf/codefresh-pov-pipelines
+    path: ./.codefresh/example-shared-ci-cd.yaml
+    revision: main
+    context: salesdemocf
+  terminationPolicy: []
+  externalResources: []
+  stages: []

@@ -16,7 +16,6 @@ steps:
     type: pipeline_trigger_merge
     title: Creating pipeline...
     working_directory: ${{clone}}/specifications
-    stage: clone
     arguments:
       SPEC: common-ci-cd-spec.yaml
       ONLY_CHANGED: true

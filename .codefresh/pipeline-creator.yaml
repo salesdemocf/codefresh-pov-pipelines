@@ -15,6 +15,7 @@ steps:
   create_pipeline:
     type: pipeline-trigger-merge
     title: Creating pipeline...
+    working_directory: ${{clone}}
     arguments:
       DEBUG: true
       SPEC: specification.yaml

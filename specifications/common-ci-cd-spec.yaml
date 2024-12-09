@@ -1,13 +1,13 @@
 version: '1.0'
 kind: pipeline
 metadata:
-  name: Automation/common-ci-cd
-  project: Automation
-  shortName: common-ci-cd
+  name: example-shared-ci-cd
+  project: default
+  shortName: example-shared-ci-cd
   deprecate: {}
   labels:
     tags:
-      - automation
+      - automation-example
   clustersInfo:
     injectAll: true
     clusters: []
@@ -52,7 +52,7 @@ metadata:
   specTemplate:
     location: git
     repo: salesdemocf/codefresh-pov-pipelines
-    path: ./.codefresh/common-ci-cd.yaml
+    path: ./.codefresh/example-shared-ci-cd.yaml
     revision: main
     context: salesdemocf
   terminationPolicy: []

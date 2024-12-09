@@ -8,9 +8,8 @@ metadata:
   labels:
     tags:
       - automation-example
-  clustersInfo:
-    injectAll: true
-    clusters: []
+spec:
+  triggers: []
   variables:
     - key: GIT_INTEGRATION_NAME
       value: salesdemocf
@@ -55,29 +54,3 @@ metadata:
     path: ./pipelines/example-shared-ci-cd/pipeline/codefresh.yaml
     revision: main
     context: salesdemocf
-  terminationPolicy: []
-  externalResources: []
-  stages: []
-  steps:
-    clone:
-      title: Cloning repository...
-      type: git-clone
-      repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
-      revision: '${{CF_REVISION}}'
-      stage: clone
-    build:
-      title: Building Docker image...
-      type: build
-      image_name: '${{CF_REPO_NAME}}'
-      working_directory: '${{clone}}'
-      tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
-      dockerfile: Dockerfile
-      stage: build
-    test:
-      title: Running test...
-      type: freestyle
-      image: 'ubuntu:latest'
-      working_directory: '${{clone}}'
-      commands:
-        - ls
-      stage: test

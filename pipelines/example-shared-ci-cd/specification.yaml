@@ -3,7 +3,6 @@ version: '1.0'
 kind: pipeline
 metadata:
   name: example-shared-ci-cd
-  project: default
   shortName: example-shared-ci-cd
   deprecate: {}
   labels:

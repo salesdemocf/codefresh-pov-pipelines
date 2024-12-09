@@ -8,8 +8,8 @@ steps:
   clone:
     title: Cloning repository...
     type: git-clone
-    repo: salesdemocf/codefresh-pov-pipelines
-    revision: master
+    repo: ${{CF_OWNER}}/${{CF_REPO_NAME}}
+    revision: ${{CF_REVISION}}
     stage: clone
 
   create_pipeline:

@@ -15,9 +15,9 @@ steps:
   create_pipeline:
     type: pipeline-trigger-merge
     title: Creating pipeline...
-    working_directory: ${{clone}}/specifications
+    working_directory: ${{clone}}/pipelines/example-shared-ci-cd
     arguments:
-      SPEC: example-shared-ci-cd-spec.yaml
+      SPEC: specification.yaml
       ONLY_CHANGED: true
       TRIGGERS_SUBDIR: triggers
     stage: create

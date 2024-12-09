@@ -53,7 +53,7 @@ metadata:
   specTemplate:
     location: git
     repo: salesdemocf/codefresh-pov-pipelines
-    path: ./.codefresh/example-shared-ci-cd.yaml
+    path: ./pipelines/example-shared-ci-cd/pipeline.yaml
     revision: main
     context: salesdemocf
   terminationPolicy: []

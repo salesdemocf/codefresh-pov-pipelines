@@ -17,6 +17,7 @@ steps:
     title: Creating pipeline...
     working_directory: ${{clone}}/pipelines/example-shared-ci-cd
     arguments:
+      DEBUG: true
       SPEC: specification.yaml
       ONLY_CHANGED: true
       TRIGGERS_SUBDIR: triggers

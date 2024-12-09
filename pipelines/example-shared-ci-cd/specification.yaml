@@ -7,7 +7,7 @@ metadata:
   deprecate: {}
   labels:
     tags:
-      - automation-example-1
+      - automation-example
   clustersInfo:
     injectAll: true
     clusters: []
@@ -52,7 +52,7 @@ metadata:
   specTemplate:
     location: git
     repo: salesdemocf/codefresh-pov-pipelines
-    path: ./pipelines/example-shared-ci-cd/pipeline.yaml
+    path: ./pipelines/example-shared-ci-cd/pipeline/codefresh.yaml
     revision: main
     context: salesdemocf
   terminationPolicy: []
